@@ -1,0 +1,22 @@
+{
+    "name": "cheungd/laravel-cached-priority-queue",
+    "description": "Cached priority queue for Laravel Framework",
+    "type": "library",
+    "require": {
+        "laravel/laravel": "^5.6",
+        "php": "7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Cheung",
+            "email": "realdavidcheung@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DavidCheung\\LaravelCachedPriorityQueue\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
