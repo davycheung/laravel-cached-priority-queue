@@ -3,7 +3,7 @@
     "description": "Cached priority queue for Laravel Framework",
     "type": "library",
     "require": {
-        "laravel/laravel": "^5.0",
+        "laravel/framework": "^5.2",
         "php": "7"
     },
     "license": "MIT",
