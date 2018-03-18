@@ -4,7 +4,7 @@ namespace DavidCheung\LaravelCachedPriorityQueue;
 
 use \SplPriorityQueue as SplPriorityQueue;
 
-class PriorityQueue extends SplPriorityQueue
+class PriorityQueue extends SplPriorityQueue implements PriorityQueueInterface
 {
     public function serialize()
     {

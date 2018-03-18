@@ -3,6 +3,7 @@
 namespace DavidCheung\LaravelCachedPriorityQueue;
 
 use Cache;
+use DavidCheung\LaravelCachedPriorityQueue\PriorityQueue;
 
 class CachedPriorityQueue
 {
@@ -12,6 +13,7 @@ class CachedPriorityQueue
     public function __construct($cacheKey)
     {
         $this->cacheKey = $cacheKey;
+        $this->queue = new PriorityQueue();
         $this->load();
     }
 
@@ -25,29 +27,6 @@ class CachedPriorityQueue
     public function insert($item, int $priority)
     {
         $this->queue->insert($item, $priority);
-    }
-
-    /**
-     * Dequeue next item from queue.
-     *
-     * @return mixed
-     */
-    public function next()
-    {
-        $item = $this->queue->next();
-
-        return $item;
-    }
-
-    /**
-     * Cache an empty queue, effectively clearing out the queue.
-     *
-     * @return void
-     */
-    public function clear()
-    {
-        $this->queue = new PriorityQueue();
-        $this->save();
     }
 
     /**
@@ -67,8 +46,6 @@ class CachedPriorityQueue
      */
     public function load()
     {
-        $this->queue = new PriorityQueue();
-
         $data = Cache::get($this->cacheKey);
         if ($data) {
             $this->queue->unserialize($data);
