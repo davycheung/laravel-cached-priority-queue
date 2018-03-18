@@ -6,12 +6,27 @@ use \SplPriorityQueue as SplPriorityQueue;
 
 class PriorityQueue extends SplPriorityQueue implements PriorityQueueInterface
 {
+    /**
+     * Minimum Priority Queue
+     * @param  [int] $priority1
+     * @param  [int] $priority2
+     * @return [int]
+     */
+    public function compare($priority1, $priority2)
+    {
+        if ($priority1 === $priority2) {
+            return 0;
+        }
+
+        return $priority1 > $priority2 ? -1 : 1;
+    }
+
     public function serialize()
     {
         $objects = [];
         $heap = clone $this;
         $heap->setExtractFlags(PriorityQueue::EXTR_BOTH);
-        $heap->top();
+        $heap->rewind();
 
         while($heap->valid()){
             $node = (object) $heap->current();
@@ -22,7 +37,7 @@ class PriorityQueue extends SplPriorityQueue implements PriorityQueueInterface
             $heap->next();
         }
 
-         return serialize($objects);
+        return serialize($objects);
     }
 
     public function unserialize($serializedData)
@@ -30,7 +45,12 @@ class PriorityQueue extends SplPriorityQueue implements PriorityQueueInterface
         $objects = unserialize($serializedData);
 
         foreach ($objects as $node) {
-            $this->insert($node->data, $node->priority);
+            if (
+                property_exists($node, 'data') &&
+                property_exists($node, 'priority')
+            ) {
+                $this->insert($node->data, $node->priority);
+            }
         }
     }
 }

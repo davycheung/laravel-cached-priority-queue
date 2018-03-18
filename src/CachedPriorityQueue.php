@@ -17,6 +17,16 @@ class CachedPriorityQueue
         $this->load();
     }
 
+    public function next()
+    {
+        return $this->queue->next();
+    }
+
+    public function current()
+    {
+        return $this->queue->current();
+    }
+
     /**
      * Insert an item into the queue with priority.
      *
