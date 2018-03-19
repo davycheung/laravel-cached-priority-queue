@@ -17,12 +17,23 @@ class CachedPriorityQueue
         $this->load();
     }
 
-    public function next()
+    /**
+     * Returns & removes the head of the queue.
+     * @return string
+     */
+    public function remove()
     {
-        return $this->queue->next();
+        $head = $this->queue->current();
+        $this->queue->next();
+
+        return $head;
     }
 
-    public function current()
+    /**
+     * Returns the head of the queue without removing.
+     * @return string
+     */
+    public function peek()
     {
         return $this->queue->current();
     }
@@ -60,5 +71,10 @@ class CachedPriorityQueue
         if ($data) {
             $this->queue->unserialize($data);
         }
+    }
+
+    public function toArray()
+    {
+        return $this->queue->toArray();
     }
 }

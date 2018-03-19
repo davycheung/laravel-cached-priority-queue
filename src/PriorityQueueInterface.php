@@ -10,4 +10,5 @@ interface PriorityQueueInterface
     public function insert($item, $priority);
     public function serialize();
     public function unserialize($serializedData);
+    public function toArray();
 }
